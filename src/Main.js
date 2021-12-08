@@ -5,7 +5,9 @@ import Search from "./Search";
 
 
 class Main extends React.Component {
-    state = {photos: [], loading: true}
+    state = {photos: [], 
+             loading: true,
+            photoOnPage: 4}
 
 
     componentDidMount() {
@@ -13,7 +15,7 @@ class Main extends React.Component {
       .then(res => res.json())
       .then(data => this.setState({photos: data.photos, loading: false}))
       .catch((err) => {this.setState({loading: false})})
-      console.log(this.state.photos)
+      
     }
 
     onSearch = (rover, sol, camera) => {
@@ -22,18 +24,21 @@ class Main extends React.Component {
         .then(res => res.json())
         .then(data => this.setState({photos: data.photos, loading: false}))
         .catch((err) => {this.setState({loading: false})})
-        console.log(this.state.photos)
+        console.log(this.state.photos.length)
     }
 
 
 
     render() {
-        const {photos, loading} = this.state;
+        const {photos, loading, photoOnPage} = this.state;
+
+        const pageCount = Math.ceil(photos.length / photoOnPage);
+        
 
         return(
             <div className="main">
                 <Search searchPhoto={this.onSearch}/> 
-
+                
                {loading ? (<Preloader />) : (<PhotoList photos={photos} />) } 
             </div>
         )

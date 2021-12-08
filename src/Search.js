@@ -136,6 +136,8 @@ class Search extends React.Component{
                             <span className="colortext">Miniature Thermal Emission Spectrometer (Mini-TES) - (Opportunity, Spirit)</span>
                         </label>
                     </div>
+
+                    
             </div>
         )
     }
